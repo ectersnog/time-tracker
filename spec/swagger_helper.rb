@@ -1,0 +1,36 @@
+# frozen_string_literal: true
+
+require 'rails_helper'
+Dir[File.join(__dir__, 'schemas', '*.rb')].each { |file| require file }
+
+RSpec.configure do |config|
+  config.openapi_root = Rails.root.join('swagger').to_s
+  config.opentapi_all_properties_required = true
+  config.openapi_specs = {
+    'v1/swagger.yaml' => {
+      openapi: '3.0.1',
+      info: {
+        title: 'API V1',
+        version: 'v1'
+      },
+      componenets: {
+        schemas: [
+          Schemas::Errors.schema
+        ].inject(:merge)
+      },
+      paths: {},
+      servers: [
+        {
+          url: 'http://{defaultHost}',
+          variables: {
+            defaultHost: {
+              default: 'localhost:3400'
+            }
+          }
+        }
+      ]
+    }
+  }
+
+  config.openapi_format = :yaml
+end

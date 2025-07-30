@@ -1,0 +1,17 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  url:  <%= ENV.fetch('DATABASE_URL') %>
+  pool: <%= [ENV.fetch('SIDEKIQ_MAX_THREADS', 0).to_i, ENV.fetch('RAILS_MAX_THREADS', 0).to_i].max + 5 %>
+
+development:
+  <<: *default
+  url: <%= ENV.fetch('DATABASE_URL') + "_dev" %>
+
+test:
+  <<: *default
+  url: <%= ENV.fetch('DATABASE_URL') + "_test" %>
+
+production:
+  <<: *default
+  sslmode: require
