@@ -35,7 +35,7 @@ module V1
       result = Lists::Update.call(params:)
 
       if result.success?
-        render locals: { list: result.success}
+        render locals: { list: result.success }
       else
         render json: { errors: [result.failure] }, status: :unprocessable_entity
       end
