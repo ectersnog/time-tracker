@@ -1,0 +1,6 @@
+# frozen_string_literal: true
+
+json.list do
+  json.id list.id
+  json.name list.name
+end
