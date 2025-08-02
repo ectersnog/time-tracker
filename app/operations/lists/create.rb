@@ -10,9 +10,10 @@ module Lists
 
     def create_list(name)
       list = List.new(name:)
-      return Success(list) if list.save
+      Success(list) if list.save
 
-      Failure(list.errors.full_messages)
+    rescue ActiveRecord::RecordNotUnique
+      Failure('List already exists.')
     end
   end
 end
