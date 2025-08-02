@@ -5,7 +5,7 @@ module V1
     def index
       result = Lists::Index.call
       if result.success?
-        render locals: { lists: result.success }
+        render locals: { lists: result.success }, status: :ok
       else
         render json: { errors: result.errors }, status: :unprocessable_entity
       end

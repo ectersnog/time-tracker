@@ -5,7 +5,7 @@ Dir[File.join(__dir__, 'schemas', '*.rb')].each { |file| require file }
 
 RSpec.configure do |config|
   config.openapi_root = Rails.root.join('swagger').to_s
-  config.opentapi_all_properties_required = true
+  config.openapi_all_properties_required = true
   config.openapi_specs = {
     'v1/swagger.yaml' => {
       openapi: '3.0.1',
@@ -13,8 +13,9 @@ RSpec.configure do |config|
         title: 'API V1',
         version: 'v1'
       },
-      componenets: {
+      components: {
         schemas: [
+          Schemas::Lists.schema,
           Schemas::Errors.schema
         ].inject(:merge)
       },

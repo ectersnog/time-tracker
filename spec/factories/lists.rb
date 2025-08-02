@@ -2,6 +2,6 @@
 
 FactoryBot.define do
   factory :list do
-    name { FFaker::Lorem.word }
+    name { FFaker::Lorem.characters(7) }
   end
 end
