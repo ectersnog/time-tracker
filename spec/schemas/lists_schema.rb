@@ -4,7 +4,7 @@ module Schemas
   module Lists
     def self.schema
       {
-        list: {
+        list_response: {
           list: {
             type: :object,
             properties: {
@@ -16,16 +16,32 @@ module Schemas
             required: %w[id name]
           }
         },
-        list_response: {
+        lists_response: {
           type: :object,
           properties: {
             lists: {
               type: :array,
               items: {
-                "$ref" => '#components/schemas/list'
+                "$ref" => '#components/schemas/list_response'
               }
             }
           }
+        },
+        list_update: {
+          type: :object,
+          properties: {
+            name: { type: :string }
+          },
+          required: ['name']
+        },
+        deleted_response: {
+          type: :object,
+          properties: {
+            deleted: {
+              '$ref' => '#components/schemas/list_response'
+            }
+          },
+          required: ['deleted']
         }
       }
     end

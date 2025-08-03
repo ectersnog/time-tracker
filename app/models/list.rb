@@ -5,6 +5,6 @@ class List < ApplicationRecord
     dependent: :destroy
 
   validates :name,
-    length: { minimum: 3, maximum: 20 },
+    length: { minimum: 4, maximum: 20 },
     presence: true
 end
