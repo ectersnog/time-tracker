@@ -14,7 +14,7 @@ RSpec.describe LineItems::Create do
     end
 
     it "validates minimum task length" do
-      result = described_class.call(params: { task: FFaker::Lorem.characters(3), list: list.id})
+      result = described_class.call(params: { task: FFaker::Lorem.characters(3), list: list.id })
       expect(result).to be_failure
     end
   end

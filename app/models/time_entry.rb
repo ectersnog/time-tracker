@@ -22,9 +22,9 @@ class TimeEntry < ApplicationRecord
     return if stopped_at.present?
 
     scope = line_item.time_entries.where(stopped_at: nil)
-    scope = scope.where.not(id: id) if persisted?
+    scope = scope.where.not(id:) if persisted?
 
-    return if scope.count.zero?
+    return if scope.none?
 
     errors.add(:stopped_at, message: "Only one active time entry permitted")
   end
