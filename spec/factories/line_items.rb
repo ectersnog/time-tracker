@@ -3,6 +3,6 @@
 FactoryBot.define do
   factory :line_item do
     list
-    task { FFaker::Lorem.word }
+    task { FFaker::Lorem.characters(10) }
   end
 end

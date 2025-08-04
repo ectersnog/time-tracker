@@ -3,6 +3,7 @@
 Rails.application.routes.draw do
   namespace :v1 do
     resources :lists, defaults: { format: :json }
+    resources :line_items, defaults: { format: :json }
   end
   mount Rswag::Ui::Engine => '/api-docs'
   mount Rswag::Api::Engine => '/api-docs'

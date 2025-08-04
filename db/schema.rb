@@ -15,13 +15,12 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_31_012819) do
   enable_extension "pg_catalog.plpgsql"
 
   create_table "line_items", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.bigint "list_id"
-    t.bigint "{null: false, type: :uuid, foreign_key: true}_id"
+    t.uuid "list_id", null: false
     t.string "task", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["list_id"], name: "index_line_items_on_list_id"
-    t.index ["{null: false, type: :uuid, foreign_key: true}_id"], name: "idx_on_{null: false, type: :uuid, foreign_key: true_a6912ab351"
+    t.index ["task"], name: "index_line_items_on_task", unique: true
   end
 
   create_table "lists", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -32,13 +31,14 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_31_012819) do
   end
 
   create_table "time_entries", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.bigint "line_item_id"
-    t.bigint "{null: false, type: :uuid, foreign_key: true}_id"
+    t.uuid "line_item_id", null: false
     t.datetime "started_at", null: false
     t.datetime "stopped_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["line_item_id"], name: "index_time_entries_on_line_item_id"
-    t.index ["{null: false, type: :uuid, foreign_key: true}_id"], name: "idx_on_{null: false, type: :uuid, foreign_key: true_01137b5251"
   end
+
+  add_foreign_key "line_items", "lists"
+  add_foreign_key "time_entries", "line_items"
 end

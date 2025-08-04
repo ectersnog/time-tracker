@@ -3,6 +3,8 @@
 require 'rails_helper'
 
 RSpec.describe TimeEntry do
+  subject { build(:time_entry, line_item: create(:line_item)) }
+
   describe 'validations' do
     it { is_expected.to allow_value(Time.current).for(:started_at) }
     it { is_expected.not_to allow_value(nil).for(:started_at) }

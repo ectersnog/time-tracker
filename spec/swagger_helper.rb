@@ -16,6 +16,7 @@ RSpec.configure do |config|
       components: {
         schemas: [
           Schemas::Lists.schema,
+          Schemas::LineItems.schema,
           Schemas::Errors.schema
         ].inject(:merge)
       },

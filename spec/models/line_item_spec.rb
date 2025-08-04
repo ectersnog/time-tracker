@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe LineItem do
   describe 'validations' do
-    it { is_expected.to allow_value(FFaker::Lorem.word).for(:task) }
+    it { is_expected.to allow_value(FFaker::Lorem.characters(4)).for(:task) }
     it { is_expected.not_to allow_value(nil).for(:task) }
   end
 
