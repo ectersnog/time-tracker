@@ -7,6 +7,7 @@ class TimeEntry < ApplicationRecord
     presence: true
 
   validate :only_one_active_time_entry
+  validate :started_at_before_stopped_at
 
   def time_in_seconds
     if stopped_at.nil?
@@ -27,5 +28,12 @@ class TimeEntry < ApplicationRecord
     return if scope.none?
 
     errors.add(:stopped_at, message: "Only one active time entry permitted")
+  end
+
+  def started_at_before_stopped_at
+    return if started_at.nil? || stopped_at.nil? # Rails apparently sometimes runs this before validating presence of started_at
+    return if stopped_at > started_at
+
+    errors.add(:stopped_at, message: "Started at must be before the stopped_at")
   end
 end

@@ -22,6 +22,16 @@ module Schemas
                   }
                 }
               }
+            },
+            type: :object,
+            properties: {
+              errors: {
+                type: :array,
+                items: {
+                  type: :array,
+                  items: { type: :string }
+                }
+              }
             }
           ]
         }
