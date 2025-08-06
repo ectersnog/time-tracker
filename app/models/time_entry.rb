@@ -8,7 +8,7 @@ class TimeEntry < ApplicationRecord
 
   validate :only_one_active_time_entry
   validate :started_at_before_stopped_at
-  validate :time_entry_not_overlapping?
+  validate :time_entry_not_overlapping
 
   def time_in_seconds
     if stopped_at.nil?
