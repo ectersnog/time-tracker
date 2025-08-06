@@ -52,15 +52,15 @@ class TimeEntry < ApplicationRecord
     errors.add(:stopped_at, message: "Started at must be before the stopped_at")
   end
 
-  def time_entry_not_overlapping?
-    return false if started_at.nil? || stopped_at.nil?
+  def time_entry_not_overlapping
+    return if started_at.nil? || stopped_at.nil?
 
     overlapping = TimeEntry
       .where(line_item_id:)
       .where.not(id:)
       .exists?(
         ["(started_at <= :start AND stopped_at > :start)",
-          start: started_at])
+         { start: started_at }])
 
     return unless overlapping
 
