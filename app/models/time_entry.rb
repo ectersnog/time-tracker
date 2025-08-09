@@ -58,9 +58,8 @@ class TimeEntry < ApplicationRecord
     overlapping = TimeEntry
       .where(line_item_id:)
       .where.not(id:)
-      .exists?(
-        ["(started_at <= :start AND stopped_at > :start)",
-         { start: started_at }])
+      .exists?(TimeEntry.where("started_at < ?", started_at).where("stopped_at > ?", started_at))
+      # .exists?("started_at <= ? AND stopped_at > ?", started_at, started_at)
 
     return unless overlapping
 
