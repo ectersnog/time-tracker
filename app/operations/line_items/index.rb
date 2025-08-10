@@ -2,6 +2,9 @@
 
 module LineItems
   class Index < ApplicationOperation
+    # Gets a list of all LineItems
+    #
+    # @return [Dry::Monads::Result::Success<ActiveRecord::Relation<LineItem>>]
     def call
       step index
     end

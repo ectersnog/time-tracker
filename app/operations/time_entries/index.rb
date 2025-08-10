@@ -2,6 +2,9 @@
 
 module TimeEntries
   class Index < ApplicationOperation
+    # Gets a list of all TimeEntries
+    #
+    # @return [Dry::Monads::Result::Success<ActiveRecord::Relation<TimeEntry>>]
     def call
       step index
     end

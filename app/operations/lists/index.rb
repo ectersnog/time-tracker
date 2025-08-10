@@ -2,6 +2,9 @@
 
 module Lists
   class Index < ApplicationOperation
+    # Gets a list of all Lists
+    #
+    # @return [Dry::Monads::Result::Success<ActiveRecord::Relation<List>>]
     def call
       step index
     end

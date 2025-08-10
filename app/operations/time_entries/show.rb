@@ -2,6 +2,11 @@
 
 module TimeEntries
   class Show < ApplicationOperation
+    # Gets a specific TimeEntry from the database
+    #
+    # @param params [Hash]
+    # @option params [String<UUID>] :id The id of the TimeEntry to have returned
+    # @return [Dry::Monads::Result::Success<TimeEntry>>]
     def call(params:)
       step find_time_entry(params[:id])
     end

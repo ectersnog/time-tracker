@@ -2,6 +2,14 @@
 
 module TimeEntries
   class Create < ApplicationOperation
+    # Creates a TimeEntry
+    #
+    # @param params [hash]
+    # @option params [String<UUID>] :line_item_id The id of LineItem to be associated with
+    # @option params [DateTime] :started_at The time that TimeEntry was started
+    # @option params [DateTime] :stopped_at The time that TimeEntry was stopped
+    # @return [Dry::Monads::Result::Success<TimeEntry>]
+    # @see TimeEntry
     def call(params:)
       step create_time_entry(params:)
     end

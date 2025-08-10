@@ -2,6 +2,11 @@
 
 module LineItems
   class Destroy < ApplicationOperation
+    # Destroys a LineItem and associated time entries
+    #
+    # @param params [Hash]
+    # @option params [String<UUID>] :id The id of the LineItem to be destroyed
+    # @return [Dry::Monads::Result::Success<LineItem>]
     def call(params:)
       step destroy(params[:id])
     end

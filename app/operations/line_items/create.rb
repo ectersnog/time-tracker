@@ -2,6 +2,12 @@
 
 module LineItems
   class Create < ApplicationOperation
+    # Creates a LineItem
+    #
+    # @param params [hash]
+    # @option params [String] :task The name of the task for LineItem
+    # @return [Dry::Monads::Result::Success<LineItem>]
+    # @see LineItem
     def call(params:)
       line_item = step create_line_item(params:)
       step start_timer(line_item)

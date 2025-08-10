@@ -2,6 +2,12 @@
 
 module Lists
   class Create < ApplicationOperation
+    # Creates a List
+    #
+    # @param params [hash]
+    # @option params [String] :name The name of the List
+    # @return [Dry::Monads::Result::Success<List>]
+    # @see List
     def call(params:)
       step create_list(params[:name])
     end

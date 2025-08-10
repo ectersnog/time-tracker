@@ -15,10 +15,11 @@ RSpec.configure do |config|
       },
       components: {
         schemas: [
-          Schemas::Lists.schema,
+          Schemas::Errors.schema,
           Schemas::LineItems.schema,
-          Schemas::TimeEntries.schema,
-          Schemas::Errors.schema
+          Schemas::Lists.schema,
+          Schemas::Reports.schema,
+          Schemas::TimeEntries.schema
         ].inject(:merge)
       },
       paths: {},

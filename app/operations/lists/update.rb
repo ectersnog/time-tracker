@@ -2,6 +2,12 @@
 
 module Lists
   class Update < ApplicationOperation
+    # Update a List in the database
+    #
+    # @param params [Hash]
+    # @option params [String<UUID>] :id The id of the List to update
+    # @option params [string] :name The name for the List
+    # @return [Dry::Monads::Result::Success<List>,Dry::Monads::Result::Failure]
     def call(params:)
       step update_list(params:)
     end

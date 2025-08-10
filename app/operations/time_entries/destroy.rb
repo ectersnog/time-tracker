@@ -2,6 +2,11 @@
 
 module TimeEntries
   class Destroy < ApplicationOperation
+    # Destroys a TimeEntry
+    #
+    # @param params [Hash]
+    # @option params [String<UUID>] :id The id of the TimeEntry to be destroyed
+    # @return [Dry::Monads::Result::Success<TimeEntry>]
     def call(params:)
       step destroy(params[:id])
     end

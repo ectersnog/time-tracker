@@ -2,6 +2,11 @@
 
 module Lists
   class Show < ApplicationOperation
+    # Gets a specific List from the database
+    #
+    # @param params [Hash]
+    # @option params [String<UUID>] :id The id of the List to have returned
+    # @return [Dry::Monads::Result::Success<List>>]
     def call(params:)
       step find_list(params[:id])
     end

@@ -2,6 +2,13 @@
 
 module TimeEntries
   class Update < ApplicationOperation
+    # Update a TimeEntry
+    #
+    # @param params [Hash]
+    # @option params [String<UUID>] :id The id of the TimeEntry to update
+    # @option params [String<UUID>] :line_item_id The associated LineItem id
+    # @option params [DateTime] :started_at The TimeEntry start time
+    # @option params [DateTime] :stopped_at The TimeEntry stop time
     def call(params:)
       step update_time_entry(params:)
     end
