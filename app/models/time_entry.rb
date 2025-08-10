@@ -29,9 +29,10 @@ class TimeEntry < ApplicationRecord
 
   validates :started_at,
     presence: true
-
+  validates :stopped_at,
+    allow_nil: true,
+    comparison: { greater_than: :started_at }
   validate :only_one_active_time_entry
-  validate :started_at_before_stopped_at
   validate :time_entry_not_overlapping
 
   # The time in seconds of the current time entry
@@ -49,8 +50,7 @@ class TimeEntry < ApplicationRecord
   def start
     return false if started_at.present?
 
-    self.started_at = Time.current
-    save
+    update(started_at: Time.current)
   end
 
   # Stops the current time entry
@@ -58,8 +58,7 @@ class TimeEntry < ApplicationRecord
   def stop
     return false if stopped_at.present?
 
-    self.stopped_at = Time.current
-    save
+    update(stopped_at: Time.current)
   end
 
   private
@@ -75,20 +74,12 @@ class TimeEntry < ApplicationRecord
     errors.add(:stopped_at, message: "Only one active time entry permitted")
   end
 
-  def started_at_before_stopped_at
-    return if started_at.nil? || stopped_at.nil? # Rails apparently sometimes runs this before validating presence of started_at
-    return if stopped_at > started_at
-
-    errors.add(:stopped_at, message: "Started at must be before the stopped_at")
-  end
-
   def time_entry_not_overlapping
     return if started_at.nil? || stopped_at.nil?
 
     overlapping = TimeEntry
       .where(line_item_id:)
       .where.not(id:)
-      # .exists?(TimeEntry.where("started_at < ?", started_at).where("stopped_at > ?", started_at))
       .exists?(["started_at < ? AND stopped_at > ?", stopped_at, started_at])
 
     return unless overlapping

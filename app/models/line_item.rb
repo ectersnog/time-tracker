@@ -44,8 +44,14 @@ class LineItem < ApplicationRecord
   # @return [Boolean]
   def stop_running_time_entry
     running = time_entries.where(stopped_at: nil)
-    return if running.empty?
+    return unless running.any?
 
+    if running.size > 1
+      Rails.logger.warn(
+        "#{Time.current} Model: #{self.class.name} | id: #{id} | " \
+        "Multiple running timers detected: #{running.size}, IDs: #{running.pluc(:id).join(', ')}"
+      )
+    end
     running.first.stop
   end
 end
