@@ -1,24 +1,20 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Project of the week, Week 3
 
-Things you may want to cover:
+# Time Tracker
 
-* Ruby version
+An API-only time tracking system. The system supports starting/stopping timers, editing line items, and generating reports with aggregated time data.
 
-* System dependencies
+# How to install
+1. Clone the repository
+2. Install depenencies with `bundle install`
 
-* Configuration
+# How to run
+1. Run `docker compose up -d`
 
-* Database creation
+# Example Usage
 
-* Database initialization
+`curl http://localhost:3400/v1/line_items`
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+`curl http://localhost:3400/v1/lists`

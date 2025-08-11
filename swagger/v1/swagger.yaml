@@ -1,0 +1,448 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+components:
+  schemas:
+    error_response:
+      oneOf:
+      - type: object
+        properties:
+          errors:
+            type: string
+      - type: object
+        properties:
+          errors:
+            type: array
+            items:
+              type: string
+      - type: object
+        properties:
+          errors:
+            type: array
+            items:
+              type: array
+              items:
+                type: string
+    line_item_response:
+      line_item:
+        type: object
+        properties:
+          id:
+            type: string
+            format: uuid
+            example: 123e4567-e89b-12d3-a456-426614174000
+          task:
+            type: string
+        required:
+        - id
+        - task
+    line_items_response:
+      type: object
+      properties:
+        line_items:
+          type: array
+          items:
+            "$ref": "#components/schemas/line_item_response"
+    line_item_update:
+      type: object
+      properties:
+        task:
+          type: string
+      required:
+      - task
+    deleted_response:
+      type: object
+      properties:
+        deleted:
+          "$ref": "#components/schemas/time_entry_response"
+      required:
+      - deleted
+    list_response:
+      list:
+        type: object
+        properties:
+          id:
+            type: string
+            format: uuid
+            example: 123e4567-e89b-12d3-a456-426614174000
+          name:
+            type: string
+        required:
+        - id
+        - name
+    lists_response:
+      type: object
+      properties:
+        lists:
+          type: array
+          items:
+            "$ref": "#components/schemas/list_response"
+    list_update:
+      type: object
+      properties:
+        name:
+          type: string
+      required:
+      - name
+    line_item_report_response:
+      line_item:
+        type: object
+        properties:
+          list:
+            type: string
+          task:
+            type: string
+          duration:
+            type: integer
+        required:
+        - list
+        - task
+        - duration
+    report_response:
+      report:
+        type: object
+        properties:
+          line_items:
+            type: array
+            items:
+              "$ref": "#components/schemas/line_item_report_response"
+    reports_params:
+      type: object
+      properties:
+        start:
+          type: string
+        end:
+          type: string
+      required:
+      - start
+      - end
+    time_entry_response:
+      time_entry:
+        type: object
+        properties:
+          id:
+            type: string
+            format: uuid
+            example: 123e4567-e89b-12d3-a456-426614174000
+          started_at:
+            type: string
+            format: date-time
+          stopped_at:
+            type: string
+            format: date-time
+        required:
+        - id
+        - started_at
+        - stopped_at
+    time_entries_response:
+      type: object
+      properties:
+        time_entries:
+          type: array
+          items:
+            "$ref": "#components/schemas/time_entry_response"
+    time_entry_update:
+      type: object
+      properties:
+        task:
+          type: string
+      required:
+      - task
+paths:
+  "/v1/line_items":
+    get:
+      summary: line_items index
+      responses:
+        '200':
+          description: line_items found
+    post:
+      summary: create line_item
+      parameters: []
+      responses:
+        '200':
+          description: create line_item
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/line_item_response"
+        '422':
+          description: unprocessable entity
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_response"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                task:
+                  type: string
+        required: true
+  "/v1/line_items/{id}":
+    get:
+      summary: show line_item
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful
+        '404':
+          description: not found
+    put:
+      summary: update line_item
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful
+        '422':
+          description: unprocessable entity
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_response"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/line_item_update"
+        required: true
+    delete:
+      summary: delete line_item
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/deleted_response"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_response"
+  "/v1/lists":
+    get:
+      summary: lists index
+      responses:
+        '200':
+          description: lists found
+    post:
+      summary: create list
+      parameters: []
+      responses:
+        '200':
+          description: create list
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/list_response"
+        '422':
+          description: unprocessable entity
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_response"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+        required: true
+  "/v1/lists/{id}":
+    get:
+      summary: show list
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful
+        '404':
+          description: not found
+    put:
+      summary: update list
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful
+        '422':
+          description: unprocessable entity
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_response"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/list_update"
+        required: true
+    delete:
+      summary: delete list
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/deleted_response"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_response"
+  "/v1/reports":
+    post:
+      summary: generate a report
+      parameters: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/report_response"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/definitions/reports_params"
+        required: true
+  "/v1/time_entries":
+    get:
+      summary: time_entries index
+      responses:
+        '200':
+          description: time_entries found
+    post:
+      summary: create time_entry
+      parameters: []
+      responses:
+        '200':
+          description: create time_entry
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/time_entry_response"
+        '422':
+          description: unprocessable entity
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_response"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                task:
+                  type: string
+        required: true
+  "/v1/time_entries/{id}":
+    get:
+      summary: show time_entry
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful
+        '404':
+          description: not found
+    put:
+      summary: update time_entry
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful
+        '422':
+          description: unprocessable entity
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_response"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/time_entry_update"
+        required: true
+    delete:
+      summary: delete time_entry
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/deleted_response"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_response"
+servers:
+- url: http://{defaultHost}
+  variables:
+    defaultHost:
+      default: localhost:3400
