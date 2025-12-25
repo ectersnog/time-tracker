@@ -97,15 +97,7 @@ GEM
     coderay (1.1.3)
     concurrent-ruby (1.3.6)
     connection_pool (3.0.2)
-<<<<<<< HEAD
     crack (1.0.1)
-||||||| 2acdb82
-    concurrent-ruby (1.3.5)
-    connection_pool (2.5.4)
-    crack (1.0.0)
-=======
-    crack (1.0.0)
->>>>>>> origin/dependabot/bundler/active_model_serializers-0.10.16
       bigdecimal
       rexml
     crass (1.0.6)
@@ -145,7 +137,7 @@ GEM
       concurrent-ruby (~> 1.0)
       dry-core (~> 1.1)
       zeitwerk (~> 2.6)
-    dry-operation (1.0.0)
+    dry-operation (1.0.1)
       dry-monads (~> 1.6)
       zeitwerk (~> 2.6)
     dry-schema (1.14.1)
@@ -356,22 +348,10 @@ GEM
       json-schema (>= 2.2, < 6.0)
       railties (>= 5.2, < 8.1)
       rspec-core (>= 2.14)
-<<<<<<< HEAD
     rswag-ui (2.17.0)
       actionpack (>= 5.2, < 8.2)
       railties (>= 5.2, < 8.2)
     rubocop (1.81.1)
-||||||| 2acdb82
-    rswag-ui (2.16.0)
-      actionpack (>= 5.2, < 8.1)
-      railties (>= 5.2, < 8.1)
-    rubocop (1.81.1)
-=======
-    rswag-ui (2.16.0)
-      actionpack (>= 5.2, < 8.1)
-      railties (>= 5.2, < 8.1)
-    rubocop (1.82.0)
->>>>>>> origin/dependabot/bundler/rubocop-rspec-3.8.0
       json (~> 2.3)
       language_server-protocol (~> 3.17.0.2)
       lint_roller (~> 1.1.0)
@@ -423,28 +403,10 @@ GEM
     tsort (0.2.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
-<<<<<<< HEAD
-    unicode-display_width (3.1.4)
-      unicode-emoji (~> 4.0, >= 4.0.4)
-    unicode-emoji (4.0.4)
-    uri (1.1.1)
-||||||| 2acdb82
-    unicode-display_width (3.1.4)
-      unicode-emoji (~> 4.0, >= 4.0.4)
-    unicode-emoji (4.0.4)
-<<<<<<< HEAD
-    uri (1.0.4)
-=======
     unicode-display_width (3.2.0)
       unicode-emoji (~> 4.1)
     unicode-emoji (4.2.0)
-    uri (1.0.4)
->>>>>>> origin/dependabot/bundler/rubocop-rspec-3.8.0
-||||||| 2acdb82
-    uri (1.0.4)
-=======
     uri (1.1.1)
->>>>>>> origin/dependabot/bundler/active_model_serializers-0.10.16
     useragent (0.16.11)
     webmock (3.26.1)
       addressable (>= 2.8.0)
