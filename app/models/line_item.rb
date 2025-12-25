@@ -49,7 +49,7 @@ class LineItem < ApplicationRecord
     if running.size > 1
       Rails.logger.warn(
         "#{Time.current} Model: #{self.class.name} | id: #{id} | " \
-        "Multiple running timers detected: #{running.size}, IDs: #{running.pluc(:id).join(', ')}"
+        "Multiple running timers detected: #{running.size}, IDs: #{running.pluck(:id).join(', ')}"
       )
     end
     running.first.stop
