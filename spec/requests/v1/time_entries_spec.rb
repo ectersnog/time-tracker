@@ -76,7 +76,7 @@ RSpec.describe 'v1/time_entries' do
       response 200, 'successful' do
         let(:existing_time_entry) { create(:time_entry) }
         let(:id) { existing_time_entry.id }
-        time = Time.zone.local(1992, 12, 24, 11, 59, 0)
+        let(:time) { Time.zone.local(1992, 12, 24, 11, 59, 0) }
         let(:time_entry) { { started_at: time } }
 
         run_test! do |response|
