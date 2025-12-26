@@ -19,7 +19,7 @@ gem "puma", ">= 5.0"
 gem "rack-cors"
 gem "rails", "~> 8.0.4"
 gem "rswag-api", "~> 2.17"
-gem "rswag-ui", "~> 2.16"
+gem "rswag-ui", "~> 2.17"
 
 group :development do
   gem "annotate"
