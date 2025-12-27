@@ -89,7 +89,7 @@ GEM
     bigdecimal (3.3.1)
     bootsnap (1.19.0)
       msgpack (~> 1.2)
-    brakeman (7.1.1)
+    brakeman (7.1.2)
       racc
     builder (3.3.0)
     case_transform (0.2)
@@ -106,7 +106,7 @@ GEM
       database_cleaner-core (~> 2.0)
     database_cleaner-core (2.0.1)
     date (3.5.1)
-    debug (1.11.0)
+    debug (1.11.1)
       irb (~> 1.10)
       reline (>= 0.3.8)
     diff-lcs (1.6.2)
