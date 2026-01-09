@@ -17,7 +17,7 @@ gem "ostruct", "~> 0.6.2"
 gem "pg", "~> 1.6"
 gem "puma", ">= 5.0"
 gem "rack-cors"
-gem "rails", "~> 8.0.4"
+gem "rails", "~> 8.1.2"
 gem "rswag-api", "~> 2.17"
 gem "rswag-ui", "~> 2.17"
 
